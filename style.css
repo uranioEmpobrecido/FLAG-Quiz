@@ -59,13 +59,30 @@ button.show-correct {
 
 #next-button {
     background-color: #B2DFDB; /* Color del botón siguiente */
-    margin-top: 20px;
     width: 100%; /* Mismo tamaño que las opciones */
     font-size: 16px; /* Asegura que el tamaño de la fuente sea el mismo */
 }
 
 #next-button:hover {
     background-color: #80CBC4; /* Color del botón siguiente al pasar el mouse */
+}
+
+#difficulty-button {
+    width: 100%; /* Mismo tamaño que las opciones */
+    font-size: 16px; /* Asegura que el tamaño de la fuente sea el mismo */
+    margin-top: 10px;
+}
+
+#difficulty-button.easy {
+    background-color: #4CAF50; /* Verde para fácil */
+}
+
+#difficulty-button.medium {
+    background-color: #2196F3; /* Azul para media */
+}
+
+#difficulty-button.hard {
+    background-color: #F44336; /* Rojo para difícil */
 }
 
 .counters {
