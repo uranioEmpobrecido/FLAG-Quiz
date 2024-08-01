@@ -213,7 +213,7 @@ const flags = [
             options = getHardOptions(currentFlag);
         }
     
-        options.splice(options.indexOf(currentFlag), 1);
+        options = options.filter(option => option.name !== currentFlag.name);
         options.splice(3, options.length - 3);
         options.push(currentFlag);
         const shuffledOptions = shuffleArray(options);
@@ -237,8 +237,11 @@ const flags = [
     }
     
     function getHardOptions(flag) {
-        // Solo opciones similares
-        return flags.filter(f => f.group === flag.group && f.name !== flag.name);
+        // Prioriza opciones similares, pero rellena con opciones aleatorias si no hay suficientes
+        const similarOptions = flags.filter(f => f.group === flag.group && f.name !== flag.name);
+        const randomOptions = shuffleArray([...flags]).filter(f => f.name !== flag.name && f.group !== flag.group);
+        const options = [...similarOptions, ...randomOptions.slice(0, 3 - similarOptions.length)];
+        return shuffleArray(options);
     }
     
     function shuffleArray(array) {
