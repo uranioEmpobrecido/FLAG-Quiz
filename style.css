@@ -1,6 +1,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -12,9 +13,16 @@ body {
     text-align: center;
     background: white;
     padding: 40px 20px;
-    border-radius: 8px;
+    border-radius: 8px; /* Esquinas redondeadas */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 300px;
+    margin-top: 20px; /* Espacio hasta arriba */
+}
+
+h1 {
+    font-size: 30px; /* Tamaño del título */
+    color: #333; /* Color del título */
+    margin-bottom: 20px;
 }
 
 #flag-display {
@@ -121,4 +129,14 @@ button.show-correct {
 .counter p {
     margin: 5px 0;
     font-weight: normal; /* Asegura que la fuente no esté en negrita */
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+footer p {
+    font-size: 10px; /* Tamaño de la fuente del pie de página */
+    color: #555; /* Color de la fuente del pie de página */
 }
