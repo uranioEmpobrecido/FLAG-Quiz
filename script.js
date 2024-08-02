@@ -195,10 +195,20 @@ let correctCount = 0;
 let incorrectCount = 0;
 let streakCount = 0;
 let difficulty = 'hard'; // Dificultad inicial
+let shownFlags = []; // Array para mantener las banderas ya mostradas
 
 function loadNewFlag() {
-    // Obtener una bandera al azar
-    currentFlag = flags[Math.floor(Math.random() * flags.length)];
+    // Obtener una bandera al azar que no haya sido mostrada
+    let availableFlags = flags.filter(flag => !shownFlags.includes(flag.name));
+    if (availableFlags.length === 0) {
+        // Si todas las banderas han sido mostradas, reiniciar la lista de banderas mostradas
+        shownFlags = [];
+        availableFlags = [...flags];
+    }
+    currentFlag = availableFlags[Math.floor(Math.random() * availableFlags.length)];
+
+    // Agregar la bandera actual a las banderas mostradas
+    shownFlags.push(currentFlag.name);
 
     // Mostrar la bandera
     document.getElementById('flag-display').innerText = currentFlag.emoji;
