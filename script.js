@@ -196,19 +196,38 @@ let incorrectCount = 0;
 let streakCount = 0;
 let difficulty = 'hard'; // Dificultad inicial
 let shownFlags = []; // Array para mantener las banderas ya mostradas
+let flagsRemaining;
+let totalFlagsToGuess;
+
+function startGame(numFlags) {
+    correctCount = 0;
+    incorrectCount = 0;
+    streakCount = 0;
+    shownFlags = [];
+    totalFlagsToGuess = numFlags === 'all' ? flags.length : numFlags;
+    flagsRemaining = totalFlagsToGuess;
+
+    document.getElementById('selection-container').style.display = 'none';
+    document.getElementById('game-buttons').style.display = 'flex';
+    document.getElementById('flag-display').innerText = '🏳️'; // Mostrar la bandera de inicio
+
+    loadNewFlag();
+}
 
 function loadNewFlag() {
+    // Verificar si se han mostrado todas las banderas seleccionadas
+    if (shownFlags.length >= totalFlagsToGuess) {
+        showEndEmoji();
+        return;
+    }
+
     // Obtener una bandera al azar que no haya sido mostrada
     let availableFlags = flags.filter(flag => !shownFlags.includes(flag.name));
-    if (availableFlags.length === 0) {
-        // Si todas las banderas han sido mostradas, reiniciar la lista de banderas mostradas
-        shownFlags = [];
-        availableFlags = [...flags];
-    }
     currentFlag = availableFlags[Math.floor(Math.random() * availableFlags.length)];
 
     // Agregar la bandera actual a las banderas mostradas
     shownFlags.push(currentFlag.name);
+    flagsRemaining = totalFlagsToGuess - shownFlags.length; // Actualizar banderas restantes
 
     // Mostrar la bandera
     document.getElementById('flag-display').innerText = currentFlag.emoji;
@@ -234,9 +253,13 @@ function loadNewFlag() {
     shuffledOptions.forEach(option => {
         const button = document.createElement('button');
         button.innerText = option.name;
+        button.className = 'option-button';
         button.onclick = () => checkAnswer(button, option);
         optionsContainer.appendChild(button);
     });
+
+    // Actualizar el contador de banderas restantes
+    document.getElementById('flags-remaining').innerText = `Flags Remaining: ${flagsRemaining}`;
 }
 
 function getMediumOptions(flag) {
@@ -311,15 +334,15 @@ function changeDifficulty() {
     if (difficulty === 'easy') {
         difficulty = 'medium';
         difficultyButton.innerText = 'Medium';
-        difficultyButton.className = 'medium';
+        difficultyButton.className = 'option-button medium';
     } else if (difficulty === 'medium') {
         difficulty = 'hard';
         difficultyButton.innerText = 'Hard';
-        difficultyButton.className = 'hard';
+        difficultyButton.className = 'option-button hard';
     } else if (difficulty === 'hard') {
         difficulty = 'easy';
         difficultyButton.innerText = 'Easy';
-        difficultyButton.className = 'easy';
+        difficultyButton.className = 'option-button easy';
     }
 }
 
@@ -327,10 +350,33 @@ function changeDifficulty() {
 document.addEventListener('DOMContentLoaded', (event) => {
     const difficultyButton = document.getElementById('difficulty-button');
     difficultyButton.innerText = 'Hard';
-    difficultyButton.className = 'hard';
+    difficultyButton.className = 'option-button hard';
+    difficultyButton.onclick = changeDifficulty;
 });
 
-document.getElementById('next-button').onclick = loadNewFlag;
-document.getElementById('difficulty-button').onclick = changeDifficulty;
+function showEndEmoji() {
+    const totalFlags = correctCount + incorrectCount;
+    const correctPercentage = (correctCount / totalFlags) * 100;
+    let emoji = '';
 
-loadNewFlag();
+    if (correctPercentage <= 25) {
+        emoji = '💩';
+    } else if (correctPercentage <= 50) {
+        emoji = '🪨';
+    } else if (correctPercentage <= 75) {
+        emoji = '🥉';
+    } else if (correctPercentage <= 85) {
+        emoji = '🥈';
+    } else if (correctPercentage <= 95) {
+        emoji = '🥇';
+    } else {
+        emoji = '🏆';
+    }
+
+    document.getElementById('flag-display').innerText = emoji;
+    document.getElementById('options-container').innerHTML = '';
+
+    // Mostrar de nuevo los botones de selección
+    document.getElementById('selection-container').style.display = 'flex';
+    document.getElementById('game-buttons').style.display = 'none';
+}

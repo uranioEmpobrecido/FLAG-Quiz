@@ -49,6 +49,24 @@ button {
     font-weight: normal; /* Asegura que la fuente no esté en negrita */
 }
 
+/* Estilos existentes */
+.option-button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 16px;
+    background-color: #4DD0E1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+}
+
+.option-button:hover {
+    background-color: #3CB9CC;
+}
+
 button:hover {
     background-color: #4DD0E1; /* Color de los botones al pasar el mouse */
 }
@@ -63,16 +81,6 @@ button.incorrect {
 
 button.show-correct {
     background-color: #4CAF50 !important; /* Verde suave para mostrar la correcta */
-}
-
-#next-button {
-    background-color: #B2DFDB; /* Color del botón siguiente */
-    width: 100%; /* Mismo tamaño que las opciones */
-    font-size: 16px; /* Asegura que el tamaño de la fuente sea el mismo */
-}
-
-#next-button:hover {
-    background-color: #80CBC4; /* Color del botón siguiente al pasar el mouse */
 }
 
 #difficulty-button {
@@ -104,7 +112,7 @@ button.show-correct {
     padding: 8px; /* Padding más delgado */
     border-radius: 4px;
     font-family: 'Roboto', sans-serif; /* Asegura que la tipografía sea la misma */
-    font-size: 14px; /* Tamaño de la fuente más pequeño */
+    font-size: 12px; /* Tamaño de la fuente más pequeño */
     font-weight: normal; /* Asegura que la fuente no esté en negrita */
     width: 28%; /* Hacemos los rectángulos más estrechos */
     text-align: center;

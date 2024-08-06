@@ -10,11 +10,16 @@
 <body>
     <div class="quiz-container">
         <h1>Guess the Flag!</h1>
-        <div id="flag-display"></div>
+        <div id="flag-display">🏳️</div>
         <div id="options-container"></div>
-        <div class="button-container">
-            <button id="difficulty-button" class="easy">Easy</button>
-            <button id="next-button">Next</button>
+        <div id="selection-container" class="button-container">
+            <button class="option-button" onclick="startGame(25)">25 Flags</button>
+            <button class="option-button" onclick="startGame(50)">50 Flags</button>
+            <button class="option-button" onclick="startGame(100)">100 Flags</button>
+            <button class="option-button" onclick="startGame('all')">All Flags</button>
+        </div>
+        <div class="button-container" id="game-buttons" style="display:none;">
+            <button id="difficulty-button" class="option-button easy">Easy</button>
         </div>
         <div class="counters">
             <div class="counter" id="correct-counter">
@@ -25,6 +30,9 @@
             </div>
             <div class="counter" id="streak-counter">
                 <p>Streak: <span>0</span></p>
+            </div>
+            <div class="counter" id="flags-remaining">
+                <p>Flags Remaining: <span>0</span></p>
             </div>
         </div>
     </div>
