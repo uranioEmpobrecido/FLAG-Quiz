@@ -148,3 +148,21 @@ footer p {
     font-size: 10px; /* Tamaño de la fuente del pie de página */
     color: #555; /* Color de la fuente del pie de página */
 }
+
+/* Asegurar que los botones de selección de banderas tengan el mismo estilo */
+#selection-container button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 16px;
+    background-color: #4DD0E1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+}
+
+#selection-container button:hover {
+    background-color: #3CB9CC;
+}
